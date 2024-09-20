@@ -10,7 +10,7 @@ const Main = () => {
   return (
     <div className='main'>
       <div className="nav">
-        <p>Gemini</p>
+        <p href="#">Gemini</p>
         <img src={assets.user_icon} alt="" />
       </div>
 
@@ -18,31 +18,43 @@ const Main = () => {
         {!showResult? 
         <>
                 <div className="greet">
-            <p><span>Hello, Olamide</span></p>
+            <p><span>Hello, UserX</span></p>
             <p>How can I help you today?</p>
 
         </div>
         <div className='cards'>
 
-            <div className="card">
+            <div className="card" onClick={()=>{
+              // setInput('Suggest beautiful places to see on an upcoming road trip')
+              onSent('Suggest beautiful places to see on an upcoming road trip')
+            }}>
                 <p>Suggest beautiful places to see on an upcoming road trip</p>
                 <img src={assets.compass_icon} alt="" />
             </div>
 
 
-            <div className="card">
+            <div className="card" onClick={()=>{
+              setInput('Briefly summarize this concept: urban planning')
+              onSent('Briefly summarize this concept: urban planning')
+            }}>
                 <p>Briefly summarize this concept: urban planning</p>
                 <img src={assets.bulb_icon} alt="" />
             </div>
 
 
-            <div className="card">
+            <div className="card" onClick={()=>{
+              onSent('BrainStorm team bonding activities for our work retreat')
+              
+            }}>
                 <p>BrainStorm team bonding activities for our work retreat</p>
                 <img src={assets.message_icon} alt="" />
             </div>
 
 
-            <div className="card">
+            <div className="card" onClick={()=>{
+              onSent('Improve the readability of the following code')
+              
+            }}>
                 <p>Improve the readability of the following code</p>
                 <img src={assets.code_icon} alt="" />
             </div>
@@ -50,7 +62,7 @@ const Main = () => {
         </> : <div className='result'>
           <div className="result-title">
             <img src={assets.user_icon} alt="" />
-            <p>{recentPrompt}</p>
+            <p>{loading? recentPrompt : recentPrompt}</p>
           </div>
           <div className="result-data">
             <img src={assets.gemini_icon} alt="" />
@@ -69,9 +81,9 @@ const Main = () => {
             <div className="search-box">
                 <input onChange={(e)=>setInput(e.target.value)} value={input} type="text" placeholder='enter prompt here' />
                 <div>
-                    <img src={assets.gallery_icon} alt="" />
-                    <img src={assets.mic_icon} alt="" />
-                    <img onClick={()=>onSent()} src={assets.send_icon} alt="" />
+                    {/* <img src={assets.gallery_icon} alt="" />
+                    <img src={assets.mic_icon} alt="" /> */}
+                    {input? <img onClick={()=>onSent()} src={assets.send_icon} alt="" /> : null }
                 </div>
             </div>
             <p className="bottom-info">

@@ -19,14 +19,28 @@ const ContextProvider = (props) =>{
         }, 75*index)
     }
 
+    const newChat = ()=>{
+        setLoading(false)
+        setShowResult(false)
+    }
+
     const onSent = async (prompt) => {
 
         setResultData('')
         setLoading(true)
         setShowResult(true)
-        setRecentPrompt(input)
-        setPreviousPrompt(prev=>[...prev, input])
-        const response = await run(input)
+        let response;
+        if(prompt !== undefined ){
+            response = await run(input)
+            setRecentPrompt(prompt)
+        }
+        else {
+            setPreviousPrompt(prev=>[...prev, input])
+            setRecentPrompt(input)
+            response= await run(input)
+        }
+        // setRecentPrompt(input)
+        // setPreviousPrompt(prev=>[...prev, input])
 
         //logic to make anything with ** turn bold
         let responseArray = response.split("**")
@@ -63,6 +77,7 @@ const ContextProvider = (props) =>{
         resultData,
         input, 
         setInput,
+        newChat
     }
 
     return(
